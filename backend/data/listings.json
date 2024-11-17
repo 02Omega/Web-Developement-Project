@@ -1,0 +1,30 @@
+{
+    "listings": [
+      {
+        "id": "1",
+        "title": "Luxury Beachfront Villa",
+        "location": "Malibu, CA",
+        "type": "Entire villa",
+        "price": 550,
+        "images": ["/images/villa1.jpg"],
+        "amenities": ["Pool", "WiFi", "Kitchen", "Beach access"],
+        "guests": 8,
+        "bedrooms": 4,
+        "bathrooms": 3,
+        "description": "Beautiful beachfront villa with stunning ocean views."
+      },
+      {
+        "id": "2",
+        "title": "Modern Downtown Loft",
+        "location": "New York, NY",
+        "type": "Entire apartment",
+        "price": 200,
+        "images": ["/images/loft1.jpg"],
+        "amenities": ["WiFi", "Kitchen", "Gym", "Parking"],
+        "guests": 4,
+        "bedrooms": 2,
+        "bathrooms": 2,
+        "description": "Stylish loft in the heart of Manhattan."
+      }
+    ]
+  }

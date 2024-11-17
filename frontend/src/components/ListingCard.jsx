@@ -1,5 +1,5 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const ListingCard = ({ listing }) => {
   return (
@@ -12,6 +12,16 @@ const ListingCard = ({ listing }) => {
       </div>
     </Link>
   );
+};
+
+ListingCard.propTypes = {
+  listing: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string).isRequired,
+    title: PropTypes.string.isRequired,
+    location: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired
+  }).isRequired
 };
 
 export default ListingCard;
