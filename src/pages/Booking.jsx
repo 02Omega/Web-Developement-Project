@@ -9,18 +9,20 @@ const Booking = () => {
   const [bookingData, setBookingData] = useState({
     checkIn: '',
     checkOut: '',
-    guests: 1
+    guests: 1,
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Fetch the listing details
   useEffect(() => {
     const fetchListing = async () => {
       try {
         const data = await getListingById(id);
         setListing(data);
       } catch (error) {
-        setError(error.message);
+        setError('Failed to fetch listing. Please try again.');
+        console.error(error);
       } finally {
         setLoading(false);
       }
@@ -29,30 +31,43 @@ const Booking = () => {
     fetchListing();
   }, [id]);
 
+  // Handle input changes for the booking form
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setBookingData(prev => ({
+    setBookingData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
+  // Handle form submission for booking
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const checkInDate = new Date(bookingData.checkIn);
+    const checkOutDate = new Date(bookingData.checkOut);
+
+    // Validation for date range
+    if (checkInDate >= checkOutDate) {
+      alert('Check-out date must be later than check-in date.');
+      return;
+    }
+
     try {
-      await createBooking({
+      const data = await createBooking({
         listingId: id,
-        ...bookingData
+        ...bookingData,
       });
-      alert('Booking successful!');
+      alert(`Booking Successful! Your Booking ID: ${data.bookingId}`);
       navigate('/');
     } catch (error) {
-      setError(error.message);
+      setError('Failed to create booking. Please try again.');
+      console.error(error);
     }
   };
 
   if (loading) return <div className="loading">Loading...</div>;
-  if (error) return <div className="error">Error: {error}</div>;
+  if (error) return <div className="error">{error}</div>;
   if (!listing) return <div className="not-found">Listing not found</div>;
 
   return (
